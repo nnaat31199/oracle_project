@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oracle_project/core/service/service.dart';
+import 'package:oracle_project/pages/pokemon_detail_page.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({super.key});
@@ -18,7 +19,7 @@ class _ThirdPageState extends State<ThirdPage> {
   }
 
   Future getPokemon() async {
-    await service.getPokemon();
+    await service.getPokemons();
     setState(() {
       isLoad = false;
     });
@@ -35,17 +36,30 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: Column(
                     children: List.generate(
                         service.pokemonData.results!.length,
-                        (index) => Card(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: const EdgeInsets.all(8),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                        'name : ${service.pokemonData.results![index].name}'),
-                                    Text(
-                                        'url : ${service.pokemonData.results![index].url}')
-                                  ],
+                        (index) => InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PokemonDetailPage(
+                                          pokemonName: service.pokemonData
+                                              .results![index].name!),
+                                    ));
+                              },
+                              child: Card(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          'name : ${service.pokemonData.results![index].name}'),
+                                      Text(
+                                          'url : ${service.pokemonData.results![index].url}')
+                                    ],
+                                  ),
                                 ),
                               ),
                             ))),
