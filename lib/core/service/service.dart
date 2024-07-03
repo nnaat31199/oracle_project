@@ -12,7 +12,7 @@ class Service {
 
   Future getPokemons() async {
     Response response = await dio.get('https://pokeapi.co/api/v2/pokemon');
-    // print(response.data['results']);
+    print(response.data);
 
     pokemonData = PokemonData.fromJson(response.data);
   }

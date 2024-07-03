@@ -33,36 +33,55 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: Text('Loading'),
               )
             : SingleChildScrollView(
+                padding: const EdgeInsets.all(8),
                 child: Column(
-                    children: List.generate(
+                  children: [
+                    GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: List.generate(
                         service.pokemonData.results!.length,
-                        (index) => InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PokemonDetailPage(
-                                          pokemonName: service.pokemonData
-                                              .results![index].name!),
-                                    ));
-                              },
-                              child: Card(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          'name : ${service.pokemonData.results![index].name}'),
-                                      Text(
-                                          'url : ${service.pokemonData.results![index].url}')
-                                    ],
-                                  ),
+                        (index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PokemonDetailPage(
+                                        pokemonName: service
+                                            .pokemonData.results![index].name!),
+                                  ));
+                            },
+                            child: Card(
+                              color: Colors.white,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Image.network(
+                                      'https://img.pokemondb.net/artwork/${service.pokemonData.results![index].name}.jpg',
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.3,
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                        '${service.pokemonData.results![index].name}'),
+                                  ],
                                 ),
                               ),
-                            ))),
-              ));
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                )));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 class SecondPage extends StatefulWidget {
@@ -16,85 +15,51 @@ class _SecondPageState extends State<SecondPage> {
       body: SafeArea(
         child: Column(
           children: [
+            Expanded(child: Container()),
             Container(
-              height: 64,
+              height: MediaQuery.of(context).size.height * 0.65,
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              color: Colors.black,
-              child: Row(
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              child:  Column(
                 children: [
-                  const Expanded(
-                      child: Text(
-                    'app name',
-                    style: TextStyle(color: Colors.white),
-                  )),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Icon(Icons.abc, color: Colors.white),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                    customButton: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(120)),
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.person_outlined,
-                            color: Colors.black,
-                          ),
-                        ],
+                  Column(
+                    children: [
+                      Text('Example',
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold)),
+                      SizedBox(
+                        height: 12,
                       ),
-                    ),
-                    items: [
-                      ...MenuItems.items.map(
-                        (item) => DropdownMenuItem<MenuItem>(
-                          value: item,
-                          child: MenuItems.buildItem(item),
-                        ),
-                      )
+                      Text('Welcome to Example'),
                     ],
-                    onChanged: (value) {},
-                    dropdownStyleData: DropdownStyleData(
-                      width: 160,
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.amber),
-                      offset: const Offset(0, 8),
-                    ),
-                    menuItemStyleData: MenuItemStyleData(
-                      customHeights: [
-                        ...List<double>.filled(MenuItems.items.length, 48)
-                      ],
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                  ))
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text('อีเมล'), TextFormField(), SizedBox(
+                        height: 8,
+                      ),],
+                  ),
+                  
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text('รหัสผ่าน'), TextFormField()],
+                  ),
                 ],
               ),
             ),
-            // Container(
-            //   child: const Row(
-            //     children: [Text('test')],
-            //   ),
-            // ),
-            Expanded(
-                child: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                child: const Column(
-                  children: [],
-                ),
-              ),
-            )),
-            Container()
           ],
         ),
       ),

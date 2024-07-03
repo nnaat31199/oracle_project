@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        // type: BottomNavigationBarType.fixed,
         onTap: (value) {
           navigationProvider.currentIndex = value;
         },

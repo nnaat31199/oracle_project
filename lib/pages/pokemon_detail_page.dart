@@ -10,7 +10,7 @@ class PokemonDetailPage extends StatefulWidget {
 }
 
 class _PokemonDetailPageState extends State<PokemonDetailPage> {
-  bool isBool = true;
+  bool isLoad = true;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
   Future getPokemonDetail() async {
     await service.getPokemonDetail(widget.pokemonName);
     setState(() {
-      isBool = false;
+      isLoad = false;
     });
   }
 
@@ -46,15 +46,19 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
-          child: service.pokemonDetail != null
+          child: !isLoad
               ? Card(
+                color: Colors.white,
                   child: Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(8),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('name : ${service.pokemonDetail!.name}'),
+                        Image.network('https://img.pokemondb.net/artwork/${widget.pokemonName}.jpg'),
+                        Text('${service.pokemonDetail!.name}'),
+                        Text('height : ${service.pokemonDetail!.height}'),
                         Text('weight : ${service.pokemonDetail!.weight}')
                       ],
                     ),
